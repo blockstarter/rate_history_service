@@ -1,4 +1,4 @@
-sh run
+lsc -c *.ls
 git pull
 git add .
 git commit -m "$1"

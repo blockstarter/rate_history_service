@@ -1,6 +1,6 @@
 express = require \express
 app = express!
-bs = require \blockstarter
+main = require \blockstarter
 start-campaign-date = 1496063101
 to-date = new Date!
 
@@ -24,6 +24,7 @@ app.get \/status , (req, res)->
   res.send main.rate-history.rate-index.running
 
 build-rates = (cb)->
+  console.log \build-rates
   currency-pair = \BTC_ETH
   err, btc_eth <-! main.rate-history.create-rate-index {start-campaign-date, currency-pair: \BTC_ETH , to-date}
   return err if not err?
@@ -33,6 +34,6 @@ build-rates = (cb)->
   cb null, { btc_eth, usdt_eth }
 
 
-
-
 app.listen 8080 
+
+<- build-rates
