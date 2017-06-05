@@ -47,7 +47,7 @@
       currencyPair: 'BTC_ETH',
       toDate: toDate
     }, function(err, btc_eth){
-      if (err == null) {
+      if (err != null) {
         return err;
       }
       main.rateHistory.createRateIndex({
@@ -55,7 +55,7 @@
         currencyPair: 'USDT_ETH',
         toDate: toDate
       }, function(err, usdt_eth){
-        if (err == null) {
+        if (err != null) {
           return err;
         }
         memory.rates = {
