@@ -1,10 +1,10 @@
 express = require \express
 app = express!
-main = require \blockstarter
+main = require \./rate.js
 start-campaign-date = 1496063101
 to-date = new Date!
 
-main.rate-history
+main
     .$on \create-index-start, ({start-campaign-date})->
       console.log \create-index-start, start-campaign-date
     .$on \load-rates, ({start-campaign-date, to-date, current-url})->
@@ -21,20 +21,20 @@ app.get \/ , (req, res)->
   resp.send "try to use /rate/:date or /status"
 
 app.get \/rate/:date , (req, res)->
-  res.send main.rate-history.get-rate req.params.date
+  res.send main.get-rate req.params.date
   
 app.get \/status , (req, res)->
-  res.send main.rate-history.rate-index.running ? { server-starting: yes }
+  res.send main.rate-index.running ? { server-starting: yes }
   
 app.get \/all-rates , (req, res)->
-  res.send res.send main.rate-history.rate-index
+  res.send res.send main.rate-index
 
 
 
 build-rates = (cb)->
-  err, btc_eth <-! main.rate-history.create-rate-index {start-campaign-date, currency-pair: \BTC_ETH , to-date}
+  err, btc_eth <-! main.create-rate-index {start-campaign-date, currency-pair: \BTC_ETH , to-date}
   return err if err?
-  err, usdt_eth <-! main.rate-history.create-rate-index {start-campaign-date, currency-pair: \USDT_ETH , to-date}
+  err, usdt_eth <-! main.create-rate-index {start-campaign-date, currency-pair: \USDT_ETH , to-date}
   return err if err?
   cb null, { btc_eth, usdt_eth }
 

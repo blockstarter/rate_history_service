@@ -3,10 +3,10 @@
   var express, app, main, startCampaignDate, toDate, buildRates;
   express = require('express');
   app = express();
-  main = require('blockstarter');
+  main = require('./rate.js');
   startCampaignDate = 1496063101;
   toDate = new Date();
-  main.rateHistory.$on('create-index-start', function(arg$){
+  main.$on('create-index-start', function(arg$){
     var startCampaignDate;
     startCampaignDate = arg$.startCampaignDate;
     return console.log('create-index-start', startCampaignDate);
@@ -31,21 +31,21 @@
     return resp.send("try to use /rate/:date or /status");
   });
   app.get('/rate/:date', function(req, res){
-    return res.send(main.rateHistory.getRate(req.params.date));
+    return res.send(main.getRate(req.params.date));
   });
   app.get('/status', function(req, res){
     var ref$;
-    return res.send((ref$ = main.rateHistory.rateIndex.running) != null
+    return res.send((ref$ = main.rateIndex.running) != null
       ? ref$
       : {
         serverStarting: true
       });
   });
   app.get('/all-rates', function(req, res){
-    return res.send(res.send(main.rateHistory.rateIndex));
+    return res.send(res.send(main.rateIndex));
   });
   buildRates = function(cb){
-    return main.rateHistory.createRateIndex({
+    return main.createRateIndex({
       startCampaignDate: startCampaignDate,
       currencyPair: 'BTC_ETH',
       toDate: toDate
@@ -53,7 +53,7 @@
       if (err != null) {
         return err;
       }
-      main.rateHistory.createRateIndex({
+      main.createRateIndex({
         startCampaignDate: startCampaignDate,
         currencyPair: 'USDT_ETH',
         toDate: toDate
