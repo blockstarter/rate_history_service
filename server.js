@@ -61,10 +61,6 @@
         if (err != null) {
           return err;
         }
-        memory.rates = {
-          btc_eth: btc_eth,
-          usdt_eth: usdt_eth
-        };
         cb(null, {
           btc_eth: btc_eth,
           usdt_eth: usdt_eth

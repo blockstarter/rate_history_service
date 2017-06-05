@@ -29,12 +29,13 @@ app.get \/status , (req, res)->
 app.get \/all-rates , (req, res)->
   res.send res.send main.rate-history.rate-index
 
+
+
 build-rates = (cb)->
   err, btc_eth <-! main.rate-history.create-rate-index {start-campaign-date, currency-pair: \BTC_ETH , to-date}
   return err if err?
   err, usdt_eth <-! main.rate-history.create-rate-index {start-campaign-date, currency-pair: \USDT_ETH , to-date}
   return err if err?
-  memory.rates = { btc_eth, usdt_eth }
   cb null, { btc_eth, usdt_eth }
 
 
