@@ -1,2 +1,4 @@
 lsc -c *.ls
+#stupid bug fix
+rm -rf node_modules/blockstarter/node_modules/bitcore-message/node_modules/bitcore-lib/
 node server
