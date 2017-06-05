@@ -18,7 +18,7 @@ main
       
 
 app.get \/ , (req, res)->
-  resp.send "try to use /rate/:date or /status"
+  res.send "try to use /rate/:date or /status"
 
 app.get \/rate/:date , (req, res)->
   res.send main.get-rate req.params.date

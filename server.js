@@ -28,7 +28,7 @@
     return console.log('create-index-end', startCampaignDate);
   });
   app.get('/', function(req, res){
-    return resp.send("try to use /rate/:date or /status");
+    return res.send("try to use /rate/:date or /status");
   });
   app.get('/rate/:date', function(req, res){
     return res.send(main.getRate(req.params.date));
