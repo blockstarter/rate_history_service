@@ -55,7 +55,7 @@
   };
   getString = function(date){
     switch (false) {
-    case !date.match(/^[0-9]+/):
+    case !date.match(/^[0-9]+$/):
       return parseInt(date);
     default:
       return moment(date.replace(' ', 'T') + 'Z').unix();
@@ -151,6 +151,7 @@
     url = buildUrl(currencyPair);
     start_campaign_ts = dateToTs(startCampaignDate);
     toTs = dateToTs(toDate);
+    console.log(toTs);
     currentUrl = url + "&end=" + (toTs + eachMinuteQuarter);
     notify('load-rates', {
       startCampaignDate: startCampaignDate,
@@ -247,10 +248,12 @@
   getRateByPair = function(ts, currencyPair){
     var rounded;
     rounded = roundMinuteQuarter('floor', ts);
+    console.log(rounded, currencyPair.toLowerCase(), Object.keys(rateIndex));
     if (rateIndex[currencyPair.toLowerCase()] == null) {
       return null;
     }
-    return rateIndex[currencyPair.toLowerCase()][rounded];
+    console.log(rounded);
+    return rateIndex[currencyPair.toLowerCase()][rounded.toString()];
   };
   getOrLoadRate = function(arg$, cb){
     var startCampaignDate, ts, currencyPair, rate;

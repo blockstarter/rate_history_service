@@ -40,7 +40,7 @@ export $on = (name, cb)->
     { $on }
 
 get-string = (date)->
-    | date.match(/^[0-9]+/) => parse-int date
+    | date.match(/^[0-9]+$/) => parse-int date
     | _ => moment(date.replace(' ', \T) + \Z).unix!
 
 date-to-ts = (date) ->
@@ -100,6 +100,7 @@ upload-rates = ({start-campaign-date, currency-pair, to-date}, cb)-->
    url = build-url currency-pair
    start_campaign_ts = date-to-ts start-campaign-date
    to-ts = date-to-ts to-date
+   console.log to-ts
    current-url = "#{url}&end=#{to-ts + each-minute-quarter}"
    notify \load-rates, {start-campaign-date, currency-pair, to-date, current-url}
    err, response, body <-! request current-url
@@ -150,8 +151,10 @@ export get-rate = (ts)->
 
 get-rate-by-pair = (ts, currency-pair)->
     rounded = round-minute-quarter \floor, ts
+    console.log rounded, currency-pair.to-lower-case!, Object.keys(rate-index)
     return null if not rate-index[currency-pair.to-lower-case!]?
-    rate-index[currency-pair.to-lower-case!][rounded]
+    console.log rounded
+    rate-index[currency-pair.to-lower-case!][rounded.to-string!]
     
 get-or-load-rate = ({start-campaign-date, ts, currency-pair}, cb) ->
     rate = get-rate {ts, currency-pair}
