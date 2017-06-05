@@ -1,0 +1,2 @@
+lsc -c *.ls
+node server

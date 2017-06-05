@@ -1,0 +1,22 @@
+{
+  "name": "rate_history_service",
+  "version": "1.0.0",
+  "description": "Blockstarter Rate History Service",
+  "main": "server.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/blockstarter/rate_history_service.git"
+  },
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/blockstarter/rate_history_service/issues"
+  },
+  "homepage": "https://github.com/blockstarter/rate_history_service#readme",
+  "dependencies": {
+    "blockstarter": "^0.1.76"
+  }
+}
