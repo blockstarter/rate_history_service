@@ -13,7 +13,7 @@
   }).$on('load-rates', function(arg$){
     var startCampaignDate, toDate, currentUrl;
     startCampaignDate = arg$.startCampaignDate, toDate = arg$.toDate, currentUrl = arg$.currentUrl;
-    return console.log('load-rates', startCampaignDate, currentUrl, startCampaignDate > toDate);
+    return console.log('load-rates', startCampaignDate, currentUrl);
   }).$on('aggregation-start', function(arg$){
     var start, length;
     start = arg$.start, length = arg$.length;
@@ -27,16 +27,21 @@
     startCampaignDate = arg$.startCampaignDate;
     return console.log('create-index-end', startCampaignDate);
   });
+  app.get('/', function(req, res){
+    return resp.send("try to use /rate/:date or /status");
+  });
   app.get('/rate/:date', function(req, res){
     return res.send(main.rateHistory.getRate(req.params.date));
   });
   app.get('/status', function(req, res){
-    return res.send(main.rateHistory.rateIndex.running);
+    var ref$;
+    return res.send((ref$ = main.rateHistory.rateIndex.running) != null
+      ? ref$
+      : {
+        serverStarting: true
+      });
   });
   buildRates = function(cb){
-    var currencyPair;
-    console.log('build-rates');
-    currencyPair = 'BTC_ETH';
     return main.rateHistory.createRateIndex({
       startCampaignDate: startCampaignDate,
       currencyPair: 'BTC_ETH',
