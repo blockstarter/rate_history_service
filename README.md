@@ -19,6 +19,8 @@ sh run
 
 ## Check 
 
+Once server starts it loads rates in memory
+
 ```Coffeescript
 http://localhost:8080 # modify port in server.ls
 ```
@@ -48,13 +50,16 @@ http://localhost:8080/rate/:unix_ts
 
 ```Coffeescript
 
-# Get status
+# Get status of service
 http://localhost:8080/status
 
 # Possible responses
 { serverStarting: true }
 
-# loading data 
-{ btc_eth: true, usdt_eth: false } # `true` when data is building and `false` when data is ready to use
+# loading trading data from Poloniex
+
+# `true` when service is calculating average rates.
+# `false` when averages calculated.
+{ btc_eth: true, usdt_eth: false } 
 
 ```
