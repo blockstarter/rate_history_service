@@ -30,14 +30,14 @@ http://localhost:8080 # modify port in server.ls
 
 ## Usage (REST API)
 
-### /
+### `GET /`
 
 ```
 return a basic information
 
 ```
 
-### `GET /rate`
+### `GET /rate/:unix_ts`
 
 ```Coffeescript
 
