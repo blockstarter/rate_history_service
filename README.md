@@ -22,3 +22,14 @@ Check
 ```
 http://localhost:8080 #modify port in server.ls
 ```
+
+Usage 
+
+```
+# Check rate
+http://localhost:8080/rate/123123123
+
+# Status
+http://localhost:8080/status
+
+```
