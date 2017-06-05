@@ -19,11 +19,16 @@ sh run
 
 ## Check 
 
-Once server starts it loads rates in memory
+Once server starts it loads calculates average rates and stores them into 
+memory for faster access.
 
 ```Coffeescript
 http://localhost:8080 # modify port in server.ls
 ```
+
+
+
+## Usage (REST API)
 
 ### /
 
@@ -32,9 +37,7 @@ return a basic information
 
 ```
 
-## Usage (RESTful)
-
-### /rate
+### `GET /rate`
 
 ```Coffeescript
 
@@ -46,7 +49,7 @@ http://localhost:8080/rate/:unix_ts
 
 ```
 
-### /status
+### `GET /status`
 
 ```Coffeescript
 
@@ -56,7 +59,7 @@ http://localhost:8080/status
 # Possible responses
 { serverStarting: true }
 
-# loading trading data from Poloniex
+# Service loads historical trading data from Poloniex...
 
 # `true` when service is calculating average rates.
 # `false` when averages calculated.
