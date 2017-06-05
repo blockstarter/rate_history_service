@@ -145,7 +145,8 @@ export get-rate = (ts)->
 
 get-rate-by-pair = (ts, currency-pair)->
     rounded = round-minute-quarter \floor, ts
-    rate-index[currency-pair]?[rounded]
+    return null if not rate-index[currency-pair]?
+    rate-index[currency-pair][rounded]
     
 get-or-load-rate = ({start-campaign-date, ts, currency-pair}, cb) ->
     rate = get-rate {ts, currency-pair}

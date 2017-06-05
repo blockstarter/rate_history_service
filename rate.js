@@ -237,9 +237,12 @@
     };
   };
   getRateByPair = function(ts, currencyPair){
-    var rounded, ref$;
+    var rounded;
     rounded = roundMinuteQuarter('floor', ts);
-    return (ref$ = rateIndex[currencyPair]) != null ? ref$[rounded] : void 8;
+    if (rateIndex[currencyPair] == null) {
+      return null;
+    }
+    return rateIndex[currencyPair][rounded];
   };
   getOrLoadRate = function(arg$, cb){
     var startCampaignDate, ts, currencyPair, rate;
