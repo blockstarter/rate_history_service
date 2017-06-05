@@ -229,7 +229,7 @@
       if (err != null) {
         return cbWrap(err);
       }
-      ri = rateIndex[currencyPair] = rates;
+      ri = rateIndex[currencyPair.toLowerCase()] = rates;
       cbWrap(null, rates);
     });
   };

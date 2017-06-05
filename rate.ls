@@ -135,7 +135,7 @@ export create-rate-index = ({start-campaign-date, currency-pair, to-date}, cb)->
      cb err, res
    err, rates <-! load-rates {start-campaign-date, currency-pair, to-date}
    return cb-wrap err if err?
-   ri = rate-index[currency-pair] = rates
+   ri = rate-index[currency-pair.to-lower-case!] = rates
    #ensure-index = ([ts, avg])-> ri[ts] = avg
    #rates |> p.obj-to-pairs |> p.each ensure-index
    cb-wrap null, rates
