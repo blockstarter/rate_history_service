@@ -25,6 +25,9 @@ app.get \/rate/:date , (req, res)->
   
 app.get \/status , (req, res)->
   res.send main.rate-history.rate-index.running ? { server-starting: yes }
+  
+app.get \/all-rates , (req, res)->
+  res.send res.send main.rate-history.rate-index
 
 build-rates = (cb)->
   err, btc_eth <-! main.rate-history.create-rate-index {start-campaign-date, currency-pair: \BTC_ETH , to-date}

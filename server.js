@@ -41,6 +41,9 @@
         serverStarting: true
       });
   });
+  app.get('/all-rates', function(req, res){
+    return res.send(res.send(main.rateHistory.rateIndex));
+  });
   buildRates = function(cb){
     return main.rateHistory.createRateIndex({
       startCampaignDate: startCampaignDate,

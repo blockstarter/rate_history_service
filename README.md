@@ -26,16 +26,12 @@ memory for faster access.
 http://localhost:8080 # modify port in server.ls
 ```
 
-
-
 ## Usage (REST API)
 
 ### `GET /`
 
-```
-return a basic information
+Returns a basic information.
 
-```
 
 ### `GET /rate/:unix_ts`
 
