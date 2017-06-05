@@ -39,9 +39,13 @@ export $on = (name, cb)->
     observers.push [name, cb]
     { $on }
 
+get-string = (date)->
+    | date.match(/^[0-9]+/) => parse-int date
+    | _ => moment(date.replace(' ', \T) + \Z).unix!
+
 date-to-ts = (date) ->
    switch typeof! date 
-     case \String then moment(date.replace(' ', \T) + \Z).unix!
+     case \String then get-string date
      case \Number then date
      case \Date  then parse-int(date.get-time! / 1000)
      case \Undefined then null
@@ -115,10 +119,10 @@ upload-rates = ({start-campaign-date, currency-pair, to-date}, cb)-->
 export rate-index = {}
 
 export get-rate-index = (currency-pair)->
-   rate-index[currency-pair]
+   rate-index[currency-pair.to-lower-case!]
    
 export set-rate-index = (currency-pair, rate-index)->
-   rate-index[currency-pair]  = rate-index
+   rate-index[currency-pair.to-lower-case!]  = rate-index
 
 export create-rate-index = ({start-campaign-date, currency-pair, to-date}, cb)->
    rate-index.running = rate-index.running ? {}
@@ -137,6 +141,7 @@ export create-rate-index = ({start-campaign-date, currency-pair, to-date}, cb)->
    cb-wrap null, rates
 
 export get-rate = (ts)->
+    
     btc-eth = get-rate-by-pair ts, \BTC_ETH
     usdt-eth = get-rate-by-pair ts, \USDT_ETH
     ETH: 
@@ -145,8 +150,8 @@ export get-rate = (ts)->
 
 get-rate-by-pair = (ts, currency-pair)->
     rounded = round-minute-quarter \floor, ts
-    return null if not rate-index[currency-pair]?
-    rate-index[currency-pair][rounded]
+    return null if not rate-index[currency-pair.to-lower-case!]?
+    rate-index[currency-pair.to-lower-case!][rounded]
     
 get-or-load-rate = ({start-campaign-date, ts, currency-pair}, cb) ->
     rate = get-rate {ts, currency-pair}

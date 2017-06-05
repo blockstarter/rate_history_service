@@ -69,5 +69,5 @@
     });
   };
   app.listen(8080);
-  buildRates(function(){});
+  buildRates(function(err, rates){});
 }).call(this);

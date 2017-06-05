@@ -41,4 +41,8 @@ build-rates = (cb)->
 
 app.listen 8080 
 
-<- build-rates
+#main.rate-index <<< JSON.parse require(\fs).read-file-sync(\./cache_for_dev_only.json).to-string(\utf8)
+
+err, rates <- build-rates
+
+#require(\fs).write-file-sync(\./cache_for_dev_only.json , JSON.stringify(rates))
