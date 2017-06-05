@@ -27,7 +27,7 @@ Usage
 
 ```
 # Check rate
-http://localhost:8080/rate/123123123
+http://localhost:8080/rate/:unix_ts
 
 # Status
 http://localhost:8080/status
